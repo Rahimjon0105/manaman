@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff5f7">
+  <title>Sevinch uchun — kichkina olam</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --pink: #ef8ca8;
+      --dark-pink: #a94f70;
+      --ink: #49343c;
+      --muted: #806b73;
+      --cream: #fffaf6;
+      --line: #f2dce3;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff8f8;
+      font-family: "DM Sans", Arial, sans-serif;
+    }
+
+    button { font: inherit; }
+
+    .topbar {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px clamp(16px, 5vw, 62px);
+      background: #fffaf6eF;
+      border-bottom: 1px solid #f4e6e9;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      color: var(--dark-pink);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .music-button, .soft-button {
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--dark-pink);
+      background: white;
+      cursor: pointer;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 88vh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 60px 20px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, #4a283233, #4a283266),
+        url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1800&q=85") center/cover;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      padding: 35px 25px;
+      color: white;
+      animation: rise-in 900ms ease both;
+    }
+
+    .eyebrow {
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: "Playfair Display", Georgia, serif;
+    }
+
+    h1 {
+      margin: 15px 0;
+      font-size: clamp(46px, 11vw, 88px);
+      line-height: 1;
+    }
+
+    .hero p {
+      max-width: 520px;
+      margin: 18px auto 25px;
+      font-size: clamp(16px, 3vw, 20px);
+      line-height: 1.7;
+    }
+
+    .primary-button {
+      display: inline-block;
+      padding: 14px 22px;
+      border: 0;
+      border-radius: 999px;
+      color: #853f5a;
+      background: #fff8f1;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: 0 8px 30px #2d182c33;
+      transition: transform .2s;
+    }
+
+    .primary-button:hover { transform: translateY(-3px); }
+
+    .section {
+      padding: 76px clamp(18px, 6vw, 80px);
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin: 0 auto 34px;
+      text-align: center;
+    }
+
+    .section-heading h2 {
+      margin: 8px 0 12px;
+      color: var(--dark-pink);
+      font-size: clamp(32px, 7vw, 50px);
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .story {
+      max-width: 890px;
+      margin: auto;
+      padding: clamp(24px, 6vw, 54px);
+      border: 1px solid #f5e3e5;
+      border-radius: 28px;
+      background: var(--cream);
+      box-shadow: 0 18px 55px #7d526010;
+    }
+
+    .story p {
+      margin: 0 0 18px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(18px, 3.6vw, 22px);
+      line-height: 1.9;
+    }
+
+    .story p:last-child { margin-bottom: 0; }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1080px;
+      margin: auto;
+    }
+
+    .photo {
+      min-height: 300px;
+      overflow: hidden;
+      border-radius: 24px;
+      background: #f1e3e4;
+      box-shadow: 0 12px 34px #57394918;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      min-height: 300px;
+      display: block;
+      object-fit: cover;
+      transition: transform .6s;
+    }
+
+    .photo:hover img { transform: scale(1.06); }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1080px;
+      margin: auto;
+    }
+
+    .quote {
+      min-height: 185px;
+      display: grid;
+      align-content: center;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: white;
+      text-align: center;
+    }
+
+    .quote span {
+      margin-bottom: 10px;
+      font-size: 27px;
+    }
+
+    .quote p {
+      margin: 0;
+      color: #684957;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 19px;
+      line-height: 1.6;
+    }
+
+    .game-wrap {
+      max-width: 700px;
+      margin: auto;
+      padding: 30px 22px;
+      border-radius: 26px;
+      background: linear-gradient(145deg, #fff, #fff0f3);
+      text-align: center;
+    }
+
+    .game-wrap p { color: var(--muted); line-height: 1.7; }
+
+    .game-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .game-buttons button {
+      min-width: 125px;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      color: var(--ink);
+      background: white;
+      cursor: pointer;
+    }
+
+    .game-buttons button:hover { background: #fff0f4; }
+
+    #gameResult {
+      min-height: 34px;
+      margin-top: 18px;
+      color: var(--dark-pink);
+      font-weight: 700;
+    }
+
+    .apology {
+      color: white;
+      background:
+        linear-gradient(180deg, #57303fdd, #57303fdd),
+        url("https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=1600&q=85") center/cover;
+    }
+
+    .apology .section-heading h2 { color: #ffe4ea; }
+    .apology .section-heading p { color: #fff0f3; }
+
+    .letter {
+      max-width: 790px;
+      margin: auto;
+      padding: clamp(25px, 6vw, 52px);
+      border: 1px solid #ffffff44;
+      border-radius: 26px;
+      background: #fffaf6f2;
+      color: var(--ink);
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(18px, 3.5vw, 22px);
+      line-height: 1.9;
+    }
+
+    .signature {
+      margin-top: 25px;
+      color: var(--dark-pink);
+      text-align: right;
+      font-style: italic;
+    }
+
+    footer {
+      padding: 35px 18px;
+      color: var(--muted);
+      background: #fffaf6;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .floating {
+      position: fixed;
+      z-index: 20;
+      bottom: -35px;
+      pointer-events: none;
+      animation: float-up 5s ease-in forwards;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes float-up {
+      to { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
+    }
+
+    @keyframes rise-in {
+      from { opacity: 0; transform: translateY(22px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 720px) {
+      .photo-grid, .quote-grid { grid-template-columns: 1fr; }
+      .photo, .photo img { min-height: 260px; max-height: 380px; }
+      .section { padding-top: 58px; padding-bottom: 58px; }
+      .hero { min-height: 78vh; }
+      .music-button { padding: 9px 11px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">Sevinch uchun ♡</div>
+    <button class="music-button" id="musicButton" type="button">♫ Mayin musiqa</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">Siz uchun tayyorlangan kichkina olam</div>
+        <h1>Sevinch</h1>
+        <p>Ba’zi insonlar kunni chiroyli qiladi. Siz esa xotiralarni ham chiroyli qilasiz.</p>
+        <a class="primary-button" href="#hikoya">Sayohatni boshlash ↓</a>
+      </div>
+    </section>
+
+    <section class="section" id="hikoya">
+      <div class="section-heading reveal">
+        <div class="eyebrow" style="color:#a94f70">01 · Kichkina hikoya</div>
+        <h2>Bir tabassumdan boshlangan</h2>
+        <p>Bu hikoya katta va’dalardan emas, oddiy va samimiy lahzalardan iborat.</p>
+      </div>
+      <article class="story reveal">
+        <p>Bir kuni odatiy kunlarning orasida Siz paydo bo‘ldingiz. Atrof o‘sha-o‘sha edi, lekin nimadir boshqacha tuyuldi — suhbatlar iliqroq, vaqt esa tezroq o‘ta boshladi.</p>
+        <p>Keyin mayda narsalar qadrli bo‘lib qoldi: bir og‘iz hol-ahvol, kutilmagan kulgi, oddiy kunni esda qolarli qiladigan Sizning borligingiz.</p>
+        <p>Bu hikoya hali davom etyapti. Men esa undagi eng chiroyli sahifalar hali oldinda ekaniga ishonishni istayman. 🌷</p>
+      </article>
+    </section>
+
+    <section class="section" style="background:#fff0f2">
+      <div class="section-heading reveal">
+        <div class="eyebrow" style="color:#a94f70">02 · Guldek lahzalar</div>
+        <h2>Sizga atalgan gullar</h2>
+        <p>Har bir gulning o‘z tili bor. Bu gullar esa shunchaki “Sizni o‘yladim” deydi.</p>
+      </div>
+      <div class="photo-grid reveal">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=85" alt="Rang-barang gullar"></div>
+        <div class="photo"><img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?auto=format&fit=crop&w=900&q=85" alt="Nozik pushti gullar"></div>
+        <div class="photo"><img src="https://images.unsplash.com/photo-1520763185298-1b434c919102?auto=format&fit=crop&w=900&q=85" alt="Bahor gullari"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <div class="eyebrow" style="color:#a94f70">03 · Yurakdan chiqqan gaplar</div>
+        <h2>Mayda, ammo muhim</h2>
+      </div>
+      <div class="quote-grid reveal">
+        <div class="quote"><span>🌙</span><p>Ba’zi insonlar yulduzga o‘xshaydi — uzoqda bo‘lsa ham, ko‘ngilga nur beradi.</p></div>
+        <div class="quote"><span>☕</span><p>Siz bilan oddiy suhbat ham kunimdagi eng yoqimli lahzaga aylanishi mumkin.</p></div>
+        <div class="quote"><span>🌷</span><p>Go‘zallik ba’zan gulda emas, unga qarab quvonadigan insonning ko‘zlarida bo‘ladi.</p></div>
+      </div>
+    </section>
+
+    <section class="section" style="background:#fff0f2">
+      <div class="section-heading reveal">
+        <div class="eyebrow" style="color:#a94f70">04 · Momiq tanaffus</div>
+        <h2>Bir quchoqcha iliqlik</h2>
+        <p>Bu ayiqcha Sizga virtual quchoq yuboryapti. Qabul qilasizmi? 🧸</p>
+      </div>
+      <div class="photo-grid reveal">
+        <div class="photo"><img src="https://images.unsplash.com/photo-1559454403-b8fb88521f11?auto=format&fit=crop&w=900&q=85" alt="Momiq o‘yinchoq ayiqcha"></div>
+        <div class="photo"><img src="https://images.unsplash.com/photo-1562040506-a9b32cb51b94?auto=format&fit=crop&w=900&q=85" alt="Yumshoq o‘yinchoq"></div>
+        <div class="photo"><img src="https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=900&q=85" alt="Momiq ayiqcha sovg‘a"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <div class="eyebrow" style="color:#a94f70">05 · Kichkina o‘yin</div>
+        <h2>Qaysi sovg‘a Sizniki?</h2>
+        <p>Birini tanlang — ichida Siz uchun kichkina tilak bor.</p>
+      </div>
+      <div class="game-wrap reveal">
+        <div class="game-buttons">
+          <button type="button" data-message="Sizga katta bir guldasta va undan ham katta tabassum tilayman 🌷">🌷 Guldasta</button>
+          <button type="button" data-message="Sizga eng yumshoq, eng iliq virtual quchoq yuborildi 🧸">🧸 Ayiqcha</button>
+          <button type="button" data-message="Bugun Sizni xursand qiladigan kichkina mo‘jiza uchrab qolsin ✨">✨ Yulduzcha</button>
+        </div>
+        <div id="gameResult" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section apology" id="xat">
+      <div class="section-heading reveal">
+        <div class="eyebrow">06 · Eng muhim sahifa</div>
+        <h2>Sizga aytmoqchi bo‘lganim</h2>
+        <p>Bu sahifadagi eng rost gaplar shu yerda.</p>
+      </div>
+      <article class="letter reveal">
+        <p>Sevinch,</p>
+        <p>Sizni qattiq xafa qilib qo‘yganimni tushundim. Qilgan ishim va aytgan gaplarim uchun chin dildan uzr so‘rayman. Sizning ko‘nglingizni og‘ritganimni oqlaydigan bahonam yo‘q.</p>
+        <p>Siz men uchun juda qadrli insonsiz. Meni darrov kechirishingizni so‘ramayman. Avvalo, Sizni tinglashga va xatoyimni amalda tuzatishga harakat qilaman.</p>
+        <p>Kechirasiz, Sevinch. Sizga ko‘proq hurmat, e’tibor va mehr ko‘rsatishim kerak edi. 🌷</p>
+        <div class="signature">Samimiy uzr bilan,<br>[Ismingiz]</div>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="section-heading reveal">
+        <div class="eyebrow" style="color:#a94f70">07 · Yakuniy tilak</div>
+        <h2>Bugun ham tabassumingiz arimasin</h2>
+        <p>Bu sahifaga qaytganingizda, Siz uchun yana bir gul ochilsin.</p>
+        <button class="soft-button" id="flowerButton" type="button">Menga gul yuboring 🌸</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Siz uchun mehr bilan tayyorlandi ♡<br>
+    <span class="serif">Har bir chiroyli hikoya samimiy so‘zdan boshlanadi.</span>
+  </footer>
+
+  <audio id="music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_946b93f7bf.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const music = document.getElementById("music");
+    const musicButton = document.getElementById("musicButton");
+
+    musicButton.addEventListener("click", async () => {
+      if (music.paused) {
+        try {
+          await music.play();
+          musicButton.textContent = "♫ Musiqani to‘xtatish";
+        } catch {
+          musicButton.textContent = "Musiqa yuklanmadi";
+        }
+      } else {
+        music.pause();
+        musicButton.textContent = "♫ Mayin musiqa";
+      }
+    });
+
+    document.querySelectorAll("[data-message]").forEach(button => {
+      button.addEventListener("click", () => {
+        document.getElementById("gameResult").textContent = button.dataset.message;
+        hearts(8);
+      });
+    });
+
+    document.getElementById("flowerButton").addEventListener("click", () => {
+      hearts(18, ["🌸", "🌷", "🌼", "💗"]);
+    });
+
+    function hearts(count, choices = ["🤍", "💗", "🌸"]) {
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          const item = document.createElement("span");
+          item.className = "floating";
+          item.textContent = choices[Math.floor(Math.random() * choices.length)];
+          item.style.left = Math.random() * 100 + "vw";
+          item.style.fontSize = (18 + Math.random() * 22) + "px";
+          document.body.appendChild(item);
+          setTimeout(() => item.remove(), 5000);
+        }, i * 90);
+      }
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
+  </script>
+</body>
+</html>
